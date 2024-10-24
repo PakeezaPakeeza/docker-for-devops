@@ -1,0 +1,23 @@
+#base image
+FROM python:3.7
+
+#working directory
+WORKDIR /app
+
+#code
+COPY . /app
+
+#instal libraries
+RUN pip install -r requirements.txt
+
+#migrations
+RUN python cool_counters/manage.py migrate
+
+#run app
+CMD ["python","cool_counters/manage.py","runserver","0.0.0.0:8000"]
+
+
+<--------------------------------->
+the link for the django app is https://github.com/deparkes/simple-django-app.git
+I did one change in cool_counters/cool_counters/settings.py  ALLOWED_HOSTS = []   --->  ALLOWED_HOSTS = ["*"]
+and i made one extra file requiremnets.txt add ------- in it.
